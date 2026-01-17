@@ -54,6 +54,13 @@ function Dashboard() {
           >
             {loading ? 'Creating...' : '+ Create New Session'}
           </button>
+
+          <button
+            className={styles.friendsButton}
+            onClick={() => navigate('/friends')}
+          >
+            👥 Manage Friends
+          </button>
         </div>
 
         <div className={styles.sessionsSection}>
