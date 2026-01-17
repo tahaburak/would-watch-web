@@ -10,7 +10,16 @@ function Login() {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  const { signIn, signUp } = useAuth();
+  const { signIn, signUp, signInWithGoogle } = useAuth();
+
+  const handleGoogleLogin = async () => {
+    try {
+      const { error } = await signInWithGoogle();
+      if (error) setError(error.message);
+    } catch (err) {
+      setError('Failed to login with Google');
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -43,6 +52,16 @@ function Login() {
         </p>
 
         {error && <div className={styles.error}>{error}</div>}
+
+        {/* <button
+          onClick={handleGoogleLogin}
+          className={`${styles.button} ${styles.googleButton}`}
+          type="button"
+        >
+          Sign in with Google
+        </button>
+
+        <div className={styles.divider}>or</div> */}
 
         <form onSubmit={handleSubmit} className={styles.form}>
           <div className={styles.inputGroup}>

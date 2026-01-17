@@ -104,6 +104,46 @@
   transform: none;
 }
 
+.googleButton {
+  background-color: #ffffff;
+  color: #333333;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.googleButton:hover {
+  background-color: #f1f1f1;
+}
+
+.divider {
+  text-align: center;
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 0.875rem;
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+
+.divider::before,
+.divider::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 45%;
+  height: 1px;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.divider::before {
+  left: 0;
+}
+
+.divider::after {
+  right: 0;
+}
+
 .toggleText {
   text-align: center;
   color: rgba(255, 255, 255, 0.6);
