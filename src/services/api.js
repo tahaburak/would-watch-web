@@ -43,6 +43,16 @@ export const sessionAPI = {
   getSession: async (sessionId) => {
     return apiRequest(`/api/sessions/${sessionId}`);
   },
+
+  vote: async (sessionId, mediaId, vote) => {
+    return apiRequest(`/api/sessions/${sessionId}/vote`, {
+      method: 'POST',
+      body: JSON.stringify({
+        media_id: mediaId,
+        vote: vote,
+      }),
+    });
+  },
 };
 
 export const mediaAPI = {
