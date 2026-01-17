@@ -4,6 +4,7 @@ import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
 import SessionLobby from './pages/SessionLobby';
 import VoteSession from './pages/VoteSession';
+import Matches from './pages/Matches';
 import ProtectedRoute from './components/ProtectedRoute';
 import './App.css';
 
@@ -34,6 +35,14 @@ function App() {
           element={
             <ProtectedRoute>
               <VoteSession />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/session/:id/matches"
+          element={
+            <ProtectedRoute>
+              <Matches />
             </ProtectedRoute>
           }
         />

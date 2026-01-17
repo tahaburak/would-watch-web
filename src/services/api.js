@@ -53,6 +53,10 @@ export const sessionAPI = {
       }),
     });
   },
+
+  getMatches: async (sessionId) => {
+    return apiRequest(`/api/sessions/${sessionId}/matches`);
+  },
 };
 
 export const mediaAPI = {
