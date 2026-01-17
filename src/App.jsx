@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
+import SessionLobby from './pages/SessionLobby';
 import ProtectedRoute from './components/ProtectedRoute';
 import './App.css';
 
@@ -16,6 +17,14 @@ function App() {
           element={
             <ProtectedRoute>
               <Dashboard />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/session/:id"
+          element={
+            <ProtectedRoute>
+              <SessionLobby />
             </ProtectedRoute>
           }
         />
