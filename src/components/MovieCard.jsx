@@ -28,13 +28,13 @@ function MovieCard({ movie, onVote }) {
       <div className={styles.actions}>
         <button
           className={`${styles.button} ${styles.noButton}`}
-          onClick={() => onVote(false)}
+          onClick={() => onVote('no')}
         >
           ❌ No
         </button>
         <button
           className={`${styles.button} ${styles.yesButton}`}
-          onClick={() => onVote(true)}
+          onClick={() => onVote('yes')}
         >
           ✅ Yes
         </button>

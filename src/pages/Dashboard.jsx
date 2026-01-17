@@ -6,14 +6,9 @@ import styles from './Dashboard.module.css';
 
 function Dashboard() {
   const navigate = useNavigate();
-  const { user, signOut } = useAuth();
+  const { user } = useAuth();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
-
-  const handleLogout = async () => {
-    await signOut();
-    navigate('/login');
-  };
 
   const handleCreateSession = async () => {
     setLoading(true);
@@ -33,8 +28,11 @@ function Dashboard() {
     <div className={styles.container}>
       <div className={styles.header}>
         <h1 className={styles.title}>Would Watch</h1>
-        <button className={styles.logoutButton} onClick={handleLogout}>
-          Logout
+        <button
+          className={styles.settingsButton}
+          onClick={() => navigate('/settings')}
+        >
+          ⚙️ Settings
         </button>
       </div>
 

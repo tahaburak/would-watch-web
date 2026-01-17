@@ -1,90 +1,94 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { sessionAPI } from '../services/api';
+import { useAuth } from '../context/AuthContext';
 import styles from './Matches.module.css';
 
 function Matches() {
   const { id } = useParams();
   const navigate = useNavigate();
+  const { user } = useAuth();
   const [matches, setMatches] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
   useEffect(() => {
-    loadMatches();
+    fetchMatches();
   }, [id]);
 
-  const loadMatches = async () => {
+  const fetchMatches = async () => {
     try {
-      const data = await sessionAPI.getMatches(id);
-      setMatches(data.matches || []);
+      const { data: { session } } = await import('../services/supabase').then(m => m.supabase.auth.getSession());
+      const token = session?.access_token;
+
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/sessions/${id}/matches`, {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to fetch matches');
+      }
+
+      const data = await response.json();
+      setMatches(data || []);
     } catch (err) {
-      setError(err.message || 'Failed to load matches');
+      setError('Failed to load matches');
+      console.error(err);
     } finally {
       setLoading(false);
     }
   };
 
-  if (loading) {
-    return (
-      <div className={styles.container}>
-        <div className={styles.loading}>Loading matches...</div>
-      </div>
-    );
-  }
+  if (loading) return <div className={styles.loading}>Loading matches...</div>;
 
   return (
     <div className={styles.container}>
-      <div className={styles.header}>
-        <h1 className={styles.title}>Your Matches</h1>
-        <button
-          className={styles.backButton}
-          onClick={() => navigate(`/session/${id}`)}
-        >
-          Back to Lobby
+      <header className={styles.header}>
+        <button onClick={() => navigate('/dashboard')} className={styles.backButton}>
+          ← Dashboard
         </button>
-      </div>
+        <h1 className={styles.title}>It's a Match! 🎉</h1>
+      </header>
 
-      <div className={styles.content}>
-        {error && <div className={styles.error}>{error}</div>}
+      {error && <div className={styles.error}>{error}</div>}
 
-        {matches.length === 0 ? (
-          <div className={styles.emptyState}>
-            <h3>No matches yet!</h3>
-            <p>Keep voting to find movies you both want to watch.</p>
-            <button
-              className={styles.voteButton}
-              onClick={() => navigate(`/session/${id}/vote`)}
-            >
-              Start Voting
-            </button>
-          </div>
-        ) : (
-          <div className={styles.matchesGrid}>
-            {matches.map((match) => (
-              <div key={match.media_id} className={styles.matchCard}>
-                {match.poster_path ? (
-                  <img
-                    src={`https://image.tmdb.org/t/p/w500${match.poster_path}`}
-                    alt={match.title}
-                    className={styles.poster}
-                  />
-                ) : (
-                  <div className={styles.noPoster}>No Image</div>
-                )}
-                <div className={styles.matchInfo}>
-                  <h3 className={styles.matchTitle}>{match.title}</h3>
-                  {match.release_date && (
-                    <p className={styles.year}>
-                      {new Date(match.release_date).getFullYear()}
-                    </p>
-                  )}
+      {matches.length === 0 ? (
+        <div className={styles.emptyState}>
+          <p>No matches yet!</p>
+          <p className={styles.subtext}>Keep voting or wait for your friends.</p>
+          <button 
+            onClick={() => navigate(`/session/${id}/vote`)} 
+            className={styles.primaryButton}
+          >
+            Keep Voting
+          </button>
+        </div>
+      ) : (
+        <div className={styles.grid}>
+          {matches.map((movie) => (
+            <div key={movie.id} className={styles.card}>
+              <div className={styles.posterWrapper}>
+                <img 
+                  src={`https://image.tmdb.org/t/p/w500${movie.metadata.poster_path}`} 
+                  alt={movie.title}
+                  className={styles.poster} 
+                />
+                <div className={styles.rating}>
+                  ⭐ {Number(movie.metadata.vote_average).toFixed(1)}
                 </div>
               </div>
-            ))}
-          </div>
-        )}
-      </div>
+              <div className={styles.info}>
+                <h3 className={styles.movieTitle}>{movie.title}</h3>
+                <p className={styles.releaseDate}>
+                  {movie.metadata.release_date?.split('-')[0]}
+                </p>
+                <p className={styles.overview}>{movie.metadata.overview}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 }

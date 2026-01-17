@@ -61,6 +61,52 @@ export const sessionAPI = {
 
 export const mediaAPI = {
   searchMovies: async (query) => {
-    return apiRequest(`/api/media/search?query=${encodeURIComponent(query)}`);
+    return apiRequest(`/api/media/search?q=${encodeURIComponent(query)}`);
+  },
+};
+
+export const profileAPI = {
+  getProfile: async () => {
+    return apiRequest('/api/me/profile');
+  },
+
+  updateProfile: async (data) => {
+    return apiRequest('/api/me/profile', {
+      method: 'PUT',
+      body: JSON.stringify(data),
+    });
+  },
+
+  updatePrivacy: async (invitePreference) => {
+    return apiRequest('/api/me/privacy', {
+      method: 'PUT',
+      body: JSON.stringify({ invite_preference: invitePreference }),
+    });
+  },
+};
+
+export const socialAPI = {
+  searchUsers: async (query) => {
+    return apiRequest(`/api/users/search?q=${encodeURIComponent(query)}`);
+  },
+
+  follow: async (userId) => {
+    return apiRequest(`/api/follows/${userId}`, {
+      method: 'POST',
+    });
+  },
+
+  unfollow: async (userId) => {
+    return apiRequest(`/api/follows/${userId}`, {
+      method: 'DELETE',
+    });
+  },
+
+  getFollowing: async () => {
+    return apiRequest('/api/me/following');
+  },
+
+  getFollowers: async () => {
+    return apiRequest('/api/me/followers');
   },
 };

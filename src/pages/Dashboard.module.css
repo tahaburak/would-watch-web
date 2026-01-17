@@ -28,24 +28,25 @@
   background-clip: text;
 }
 
-.logoutButton {
-  background: rgba(239, 68, 68, 0.1);
-  border: 1px solid rgba(239, 68, 68, 0.3);
+.settingsButton {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 10px;
   padding: 10px 20px;
-  color: #fca5a5;
+  color: rgba(255, 255, 255, 0.8);
   font-size: 14px;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
 }
 
-.logoutButton:hover {
-  background: rgba(239, 68, 68, 0.2);
+.settingsButton:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.2);
   transform: translateY(-2px);
 }
 
-.logoutButton:active {
+.settingsButton:active {
   transform: translateY(0);
 }
 
