@@ -3,7 +3,7 @@ FROM node:22-bookworm-slim AS builder
 
 WORKDIR /app
 
-ENV BUILD_TIMESTAMP=202601180435
+ENV BUILD_TIMESTAMP=202601180445
 
 # Copy package files
 COPY package.json package-lock.json ./
