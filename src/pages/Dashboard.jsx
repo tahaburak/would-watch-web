@@ -1,27 +1,36 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { sessionAPI } from '../services/api';
+import { roomAPI } from '../services/api';
+import CreateRoomModal from '../components/CreateRoomModal';
 import styles from './Dashboard.module.css';
 
 function Dashboard() {
   const navigate = useNavigate();
   const { user } = useAuth();
-  const [loading, setLoading] = useState(false);
+  const [rooms, setRooms] = useState([]);
+  const [showCreateModal, setShowCreateModal] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
-  const handleCreateSession = async () => {
-    setLoading(true);
-    setError('');
+  useEffect(() => {
+    loadRooms();
+  }, []);
 
+  const loadRooms = async () => {
     try {
-      const response = await sessionAPI.createSession();
-      navigate(`/session/${response.id}`);
+      const data = await roomAPI.getRooms();
+      setRooms(data.rooms || []);
     } catch (err) {
-      setError(err.message || 'Failed to create session');
+      console.error('Failed to load rooms:', err);
+      // Don't show error to user, just show empty list
     } finally {
       setLoading(false);
     }
+  };
+
+  const handleRoomCreated = () => {
+    loadRooms();
   };
 
   return (
@@ -49,10 +58,9 @@ function Dashboard() {
         <div className={styles.actionsSection}>
           <button
             className={styles.createButton}
-            onClick={handleCreateSession}
-            disabled={loading}
+            onClick={() => setShowCreateModal(true)}
           >
-            {loading ? 'Creating...' : '+ Create New Session'}
+            + Create New Room
           </button>
 
           <button
@@ -64,12 +72,42 @@ function Dashboard() {
         </div>
 
         <div className={styles.sessionsSection}>
-          <h3>Your Sessions</h3>
-          <p className={styles.emptyState}>
-            No active sessions yet. Create one to get started!
-          </p>
+          <h3>Your Rooms</h3>
+          {loading ? (
+            <p>Loading...</p>
+          ) : rooms.length === 0 ? (
+            <p className={styles.emptyState}>
+              No active rooms yet. Create one to get started!
+            </p>
+          ) : (
+            <div className={styles.roomGrid}>
+              {rooms.map((room) => (
+                <div
+                  key={room.id}
+                  className={styles.roomCard}
+                  onClick={() => navigate(`/session/${room.id}`)}
+                >
+                  <div className={styles.roomName}>{room.name}</div>
+                  <div className={styles.roomDetails}>
+                    <span className={styles.roomStatus}>
+                      {room.is_public ? '🌐 Public' : '🔒 Private'}
+                    </span>
+                    <span className={styles.roomDate}>
+                      {new Date(room.created_at).toLocaleDateString()}
+                    </span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       </div>
+
+      <CreateRoomModal
+        isOpen={showCreateModal}
+        onClose={() => setShowCreateModal(false)}
+        onSuccess={handleRoomCreated}
+      />
     </div>
   );
 }

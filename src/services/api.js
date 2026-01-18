@@ -110,3 +110,27 @@ export const socialAPI = {
     return apiRequest('/api/me/followers');
   },
 };
+
+export const roomAPI = {
+  createRoom: async (name, isPublic, initialMembers = []) => {
+    return apiRequest('/api/rooms', {
+      method: 'POST',
+      body: JSON.stringify({
+        name,
+        is_public: isPublic,
+        initial_members: initialMembers,
+      }),
+    });
+  },
+
+  getRooms: async () => {
+    return apiRequest('/api/rooms');
+  },
+
+  inviteUser: async (roomId, userId) => {
+    return apiRequest(`/api/rooms/${roomId}/invite`, {
+      method: 'POST',
+      body: JSON.stringify({ user_id: userId }),
+    });
+  },
+};
