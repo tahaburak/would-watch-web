@@ -3,7 +3,16 @@ FROM node:22-bookworm-slim AS builder
 
 WORKDIR /app
 
-ENV BUILD_TIMESTAMP=202601180455
+ENV BUILD_TIMESTAMP=202601180500
+
+ARG VITE_SUPABASE_URL
+ARG VITE_SUPABASE_ANON_KEY
+ENV VITE_SUPABASE_URL=$VITE_SUPABASE_URL
+ENV VITE_SUPABASE_ANON_KEY=$VITE_SUPABASE_ANON_KEY
+
+# Debug build args
+RUN echo "Building with Supabase URL: ${VITE_SUPABASE_URL}" && \
+    echo "Building with Anon Key length: ${#VITE_SUPABASE_ANON_KEY}"
 
 # Copy package files
 COPY package.json package-lock.json ./
