@@ -11,8 +11,7 @@ services:
       - "80:80"
     networks:
       - would_watch_net
-    depends_on:
-      - would_watch_backend
+
     # Explicitly link if needed, but network dns should suffice
     
 networks:
