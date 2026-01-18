@@ -47,7 +47,7 @@ function Dashboard() {
 
       <div className={styles.content}>
         <div className={styles.welcomeSection}>
-          <h2>Welcome back!</h2>
+          <h2>Welcome back! (v3)</h2>
           <p className={styles.subtitle}>
             You are logged in as: {user?.email}
           </p>
