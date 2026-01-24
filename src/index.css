@@ -3,9 +3,25 @@
   line-height: 1.5;
   font-weight: 400;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  color-scheme: dark;
+  
+  /* Gotham Noir Design System */
+  --bg-dark: #000000;
+  --glass-base: rgba(5, 5, 5, 0.6);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --text-primary: #ffffff;
+  --text-secondary: rgba(200, 210, 220, 0.7);
+  --accent-primary: #E50914;
+  --accent-glow: 0 0 30px rgba(0, 0, 0, 0.9);
+  
+  --hero-height: 85vh;
+  --glass-blur: 20px;
+  --radius-lg: 24px;
+  --radius-pill: 100px;
+  
+  /* App Defaults */
+  color: var(--text-primary);
+  background-color: var(--bg-dark);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;

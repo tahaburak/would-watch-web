@@ -1,214 +1,188 @@
-.container {
-  min-height: 100vh;
-  background: linear-gradient(135deg, #0f0f1e 0%, #1a1a2e 50%, #16213e 100%);
-  padding: 20px;
+
+.heroWrapper {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background-color: var(--bg-dark);
 }
 
-.header {
+.heroBackground {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-image: url('https://image.tmdb.org/t/p/original/8Y43POKjjKDGI9MH89NW0NAzzp8.jpg'); /* The Batman (2022) as placeholder */
+  background-size: cover;
+  background-position: center;
+}
+
+.heroOverlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(0, 0, 0, 0.4) 50%,
+    var(--bg-dark) 95%
+  );
+}
+
+.contentContainer {
+  position: relative;
+  z-index: 10;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 40px;
+}
+
+
+.topBar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 20px;
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 20px;
-  margin-bottom: 30px;
+  padding: 20px 0;
 }
 
-.title {
-  font-size: 28px;
+.logo {
+  font-size: 1.5rem;
   font-weight: 700;
-  color: #ffffff;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: var(--text-primary);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.5);
 }
 
-.settingsButton {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 10px;
-  padding: 10px 20px;
-  color: rgba(255, 255, 255, 0.8);
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.settingsButton:hover {
-  background: rgba(255, 255, 255, 0.08);
-  border-color: rgba(255, 255, 255, 0.2);
-  transform: translateY(-2px);
-}
-
-.settingsButton:active {
-  transform: translateY(0);
-}
-
-.content {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 20px;
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 20px;
-  color: rgba(255, 255, 255, 0.8);
-}
-
-.subtitle {
-  color: rgba(255, 255, 255, 0.6);
-  font-size: 16px;
-  margin-top: 10px;
-}
-
-.welcomeSection {
-  margin-bottom: 30px;
-}
-
-.welcomeSection h2 {
-  color: #ffffff;
-  font-size: 24px;
-  margin-bottom: 8px;
-}
-
-.actionsSection {
-  margin-bottom: 30px;
+.navGroup {
   display: flex;
-  gap: 15px;
-}
-
-.createButton {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  border: none;
-  border-radius: 12px;
-  padding: 16px 32px;
-  color: #ffffff;
-  font-size: 16px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  flex: 1;
-  max-width: 300px;
-}
-
-.createButton:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(102, 126, 234, 0.4);
-}
-
-.createButton:active {
-  transform: translateY(0);
-}
-
-.createButton:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-  transform: none;
-}
-
-.friendsButton {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 12px;
-  padding: 16px 32px;
-  color: #ffffff;
-  font-size: 16px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  flex: 1;
-  max-width: 300px;
-}
-
-.friendsButton:hover {
-  background: rgba(255, 255, 255, 0.08);
-  border-color: rgba(255, 255, 255, 0.2);
-  transform: translateY(-2px);
-}
-
-.friendsButton:active {
-  transform: translateY(0);
-}
-
-.sessionsSection {
-  margin-top: 30px;
-}
-
-.sessionsSection h3 {
-  color: #ffffff;
-  font-size: 20px;
-  margin-bottom: 15px;
-}
-
-.emptyState {
-  color: rgba(255, 255, 255, 0.5);
-  font-size: 14px;
-  font-style: italic;
-  text-align: center;
-  padding: 40px;
-  background: rgba(255, 255, 255, 0.02);
-  border-radius: 12px;
-  border: 1px dashed rgba(255, 255, 255, 0.1);
-}
-
-.roomGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 20px;
 }
 
-.roomCard {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 12px;
-  padding: 20px;
-  cursor: pointer;
+.navButton {
+  background: transparent;
+  border: 1px solid var(--glass-border);
+  color: var(--text-secondary);
+  border-radius: var(--radius-pill);
+  padding: 8px 16px;
+  backdrop-filter: blur(4px);
   transition: all 0.3s ease;
 }
 
-.roomCard:hover {
-  background: rgba(255, 255, 255, 0.08);
+.navButton:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text-primary);
   border-color: rgba(255, 255, 255, 0.2);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.createButton {
+  composes: navButton;
+  background: var(--accent-primary);
+  color: white;
+  border: none;
+  font-weight: 600;
+  box-shadow: var(--accent-glow);
+}
+
+.createButton:hover {
+  transform: scale(1.05);
+  background: #ff1e1e;
+}
+
+.heroContent {
+  margin-top: auto;
+  margin-bottom: 5vh;
+  max-width: 800px;
+}
+
+.welcomeText {
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+  margin-bottom: 10px;
+  font-weight: 500;
+}
+
+.mainTitle {
+  font-size: 5rem;
+  line-height: 1;
+  font-weight: 800;
+  margin: 0 0 40px 0;
+  background: linear-gradient(180deg, #fff 0%, #ccc 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 10px 20px rgba(0,0,0,0.5));
+}
+
+.activeRoomsSection {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.sectionTitle {
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--text-secondary);
+  opacity: 0.8;
+}
+
+.roomsGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.roomPill {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 24px;
+  background: var(--glass-base);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-pill);
+  backdrop-filter: blur(var(--glass-blur));
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.roomPill:hover {
+  transform: translateY(-2px) scale(1.02);
+  background: rgba(25, 25, 25, 0.7);
+  border-color: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);
 }
 
 .roomName {
-  font-size: 18px;
+  color: var(--text-primary);
   font-weight: 600;
-  color: #fff;
-  margin-bottom: 12px;
+  font-size: 1.1rem;
 }
 
-.roomDetails {
+.roomMeta {
   display: flex;
-  justify-content: space-between;
+  gap: 8px;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
   align-items: center;
-  font-size: 13px;
-  color: rgba(255, 255, 255, 0.5);
 }
 
-.roomStatus {
-  background: rgba(255, 255, 255, 0.1);
-  padding: 4px 8px;
-  border-radius: 4px;
-  font-size: 11px;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
+.statusDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #4ade80;
+  box-shadow: 0 0 10px #4ade80;
 }
 
-.error {
-  background: rgba(239, 68, 68, 0.1);
-  border: 1px solid rgba(239, 68, 68, 0.3);
-  border-radius: 10px;
-  padding: 12px;
-  color: #fca5a5;
-  font-size: 14px;
-  margin-bottom: 20px;
+.privateDot {
+  background-color: #fbbf24;
+  box-shadow: 0 0 10px #fbbf24;
+}
+
+.emptyState {
+  color: var(--text-secondary);
+  font-style: italic;
+  opacity: 0.6;
 }

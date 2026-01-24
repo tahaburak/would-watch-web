@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { ThemeProvider } from './context/ThemeContext';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
@@ -12,60 +13,62 @@ import './App.css';
 
 function App() {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route
-          path="/dashboard"
-          element={
-            <ProtectedRoute>
-              <Dashboard />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/settings"
-          element={
-            <ProtectedRoute>
-              <Settings />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/friends"
-          element={
-            <ProtectedRoute>
-              <Friends />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/session/:id"
-          element={
-            <ProtectedRoute>
-              <SessionLobby />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/session/:id/vote"
-          element={
-            <ProtectedRoute>
-              <VoteSession />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/session/:id/matches"
-          element={
-            <ProtectedRoute>
-              <Matches />
-            </ProtectedRoute>
-          }
-        />
-      </Routes>
-    </Router>
+    <ThemeProvider>
+      <Router>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route
+            path="/dashboard"
+            element={
+              <ProtectedRoute>
+                <Dashboard />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/settings"
+            element={
+              <ProtectedRoute>
+                <Settings />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/friends"
+            element={
+              <ProtectedRoute>
+                <Friends />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/session/:id"
+            element={
+              <ProtectedRoute>
+                <SessionLobby />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/session/:id/vote"
+            element={
+              <ProtectedRoute>
+                <VoteSession />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/session/:id/matches"
+            element={
+              <ProtectedRoute>
+                <Matches />
+              </ProtectedRoute>
+            }
+          />
+        </Routes>
+      </Router>
+    </ThemeProvider>
   );
 }
 
