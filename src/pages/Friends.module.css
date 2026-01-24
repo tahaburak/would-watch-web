@@ -1,9 +1,41 @@
-.container {
-  min-height: 100vh;
-  background: linear-gradient(135deg, #0f0f1e 0%, #1a1a2e 50%, #16213e 100%);
-  padding: 20px;
+.heroWrapper {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  background-color: var(--bg-dark);
 }
 
+.heroBackground {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-image: url('https://image.tmdb.org/t/p/original/8Y43POKjjKDGI9MH89NW0NAzzp8.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+.heroOverlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(0, 0, 0, 0.6) 30%,
+    var(--bg-dark) 90%
+  );
+  backdrop-filter: blur(10px);
+}
+
+.contentContainer {
+  position: relative;
+  z-index: 10;
+  height: 100%;
+  padding: 40px;
+  overflow-y: auto;
+}
+
+/* Header */
 .header {
   max-width: 900px;
   margin: 0 auto 30px;
@@ -13,34 +45,37 @@
 }
 
 .backButton {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 10px;
-  padding: 10px 20px;
-  color: rgba(255, 255, 255, 0.8);
+  background: transparent;
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-pill);
+  padding: 8px 20px;
+  color: var(--text-secondary);
   font-size: 14px;
   font-weight: 600;
   cursor: pointer;
+  backdrop-filter: blur(4px);
   transition: all 0.3s ease;
 }
 
 .backButton:hover {
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text-primary);
   border-color: rgba(255, 255, 255, 0.2);
-  transform: translateY(-2px);
 }
 
 .title {
-  font-size: 32px;
-  font-weight: 700;
-  color: #ffffff;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  background: linear-gradient(180deg, #fff 0%, #ccc 100%);
+  background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  background-clip: text;
   margin: 0;
+  text-shadow: 0 4px 10px rgba(0,0,0,0.5);
 }
 
+/* Content */
 .content {
   max-width: 900px;
   margin: 0 auto;
@@ -50,9 +85,11 @@
   display: flex;
   gap: 8px;
   margin-bottom: 30px;
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--glass-base);
+  border: 1px solid var(--glass-border);
   padding: 6px;
-  border-radius: 12px;
+  border-radius: 16px;
+  backdrop-filter: blur(var(--glass-blur));
 }
 
 .tab {
@@ -60,8 +97,8 @@
   padding: 12px;
   background: transparent;
   border: none;
-  border-radius: 8px;
-  color: rgba(255, 255, 255, 0.6);
+  border-radius: 12px;
+  color: var(--text-secondary);
   font-size: 14px;
   font-weight: 600;
   cursor: pointer;
@@ -69,14 +106,17 @@
 }
 
 .tab:hover {
-  color: rgba(255, 255, 255, 0.8);
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.05);
 }
 
 .activeTab {
   background: rgba(255, 255, 255, 0.1);
-  color: #ffffff;
+  color: var(--text-primary);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
 }
 
+/* Search */
 .searchForm {
   display: flex;
   gap: 12px;
@@ -85,41 +125,43 @@
 
 .searchInput {
   flex: 1;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 12px;
-  padding: 16px 20px;
-  color: #ffffff;
+  background: var(--glass-base);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-pill);
+  padding: 16px 24px;
+  color: var(--text-primary);
   font-size: 14px;
   transition: all 0.3s ease;
+  backdrop-filter: blur(var(--glass-blur));
 }
 
 .searchInput:focus {
   outline: none;
-  border-color: #667eea;
-  background: rgba(255, 255, 255, 0.08);
-  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+  border-color: var(--text-secondary);
+  background: rgba(0, 0, 0, 0.8);
 }
 
 .searchInput::placeholder {
-  color: rgba(255, 255, 255, 0.3);
+  color: var(--text-secondary);
+  opacity: 0.7;
 }
 
 .searchButton {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: var(--accent-primary);
   border: none;
-  border-radius: 12px;
+  border-radius: var(--radius-pill);
   padding: 16px 32px;
-  color: #ffffff;
+  color: white;
   font-size: 14px;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
+  box-shadow: var(--accent-glow);
 }
 
 .searchButton:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+  filter: brightness(1.1);
 }
 
 .searchButton:disabled {
@@ -128,6 +170,7 @@
   transform: none;
 }
 
+/* User List */
 .userList {
   display: flex;
   flex-direction: column;
@@ -139,16 +182,17 @@
   justify-content: space-between;
   align-items: center;
   padding: 20px;
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 12px;
+  background: var(--glass-base);
+  backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
   transition: all 0.3s ease;
 }
 
 .userCard:hover {
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(20, 20, 20, 0.8);
   border-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
 }
 
 .userInfo {
@@ -158,21 +202,21 @@
 .userName {
   font-size: 16px;
   font-weight: 600;
-  color: #ffffff;
+  color: var(--text-primary);
   margin-bottom: 4px;
 }
 
 .userEmail {
   font-size: 14px;
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--text-secondary);
 }
 
 .followButton {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: var(--accent-primary);
   border: none;
-  border-radius: 8px;
+  border-radius: var(--radius-pill);
   padding: 10px 24px;
-  color: #ffffff;
+  color: white;
   font-size: 14px;
   font-weight: 600;
   cursor: pointer;
@@ -181,15 +225,16 @@
 
 .followButton:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+  filter: brightness(1.1);
+  box-shadow: var(--accent-glow);
 }
 
 .unfollowButton {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 8px;
+  background: transparent;
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-pill);
   padding: 10px 24px;
-  color: rgba(255, 255, 255, 0.8);
+  color: var(--text-secondary);
   font-size: 14px;
   font-weight: 600;
   cursor: pointer;
@@ -198,30 +243,122 @@
 
 .unfollowButton:hover {
   background: rgba(255, 255, 255, 0.1);
-  transform: translateY(-2px);
+  color: var(--text-primary);
+  border-color: rgba(255, 255, 255, 0.2);
 }
 
 .emptyState {
   text-align: center;
   padding: 60px 20px;
-  color: rgba(255, 255, 255, 0.5);
+  color: var(--text-secondary);
   font-size: 16px;
+  font-style: italic;
+  opacity: 0.7;
 }
 
 .loading {
   text-align: center;
   padding: 40px 20px;
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--text-secondary);
   font-size: 16px;
 }
 
 .error {
   background: rgba(239, 68, 68, 0.1);
   border: 1px solid rgba(239, 68, 68, 0.3);
-  border-radius: 10px;
+  border-radius: 8px;
   padding: 12px;
   color: #fca5a5;
   font-size: 14px;
   margin-bottom: 20px;
   text-align: center;
+}
+
+/* Tablet breakpoint */
+@media (max-width: 1024px) {
+  .contentContainer {
+    padding: 30px;
+  }
+
+  .title {
+    font-size: 2.2rem;
+  }
+}
+
+/* Mobile breakpoint */
+@media (max-width: 768px) {
+  .contentContainer {
+    padding: 16px;
+  }
+
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 20px;
+  }
+
+  .title {
+    font-size: 2rem;
+  }
+
+  .tabs {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .tab {
+    width: 100%;
+    text-align: center;
+    border-radius: 8px;
+  }
+
+  .searchForm {
+    flex-direction: column;
+  }
+
+  .searchButton {
+    width: 100%;
+  }
+
+  .userCard {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .userInfo {
+    width: 100%;
+  }
+
+  .followButton, .unfollowButton {
+    width: 100%;
+  }
+}
+
+/* Small mobile breakpoint */
+@media (max-width: 480px) {
+  .contentContainer {
+    padding: 12px;
+  }
+
+  .title {
+    font-size: 1.75rem;
+  }
+
+  .searchInput {
+    font-size: 16px; /* Prevents zoom on iOS */
+  }
+
+  .userCard {
+    padding: 16px;
+  }
+
+  .userName {
+    font-size: 15px;
+  }
+
+  .userEmail {
+    font-size: 13px;
+  }
 }
