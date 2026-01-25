@@ -9,6 +9,7 @@ import SessionLobby from './pages/SessionLobby';
 import VoteSession from './pages/VoteSession';
 import Matches from './pages/Matches';
 import ProtectedRoute from './components/ProtectedRoute';
+import HeroLayout from './components/HeroLayout';
 import './App.css';
 
 function App() {
@@ -17,55 +18,25 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route
-            path="/dashboard"
-            element={
-              <ProtectedRoute>
-                <Dashboard />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/settings"
-            element={
-              <ProtectedRoute>
-                <Settings />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/friends"
-            element={
-              <ProtectedRoute>
-                <Friends />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/session/:id"
-            element={
-              <ProtectedRoute>
-                <SessionLobby />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/session/:id/vote"
-            element={
-              <ProtectedRoute>
-                <VoteSession />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/session/:id/matches"
-            element={
-              <ProtectedRoute>
-                <Matches />
-              </ProtectedRoute>
-            }
-          />
+          
+          {/* Public Route for Login, also wrapped in HeroLayout for consistency */}
+          <Route element={<HeroLayout />}>
+            <Route path="/login" element={<Login />} />
+          </Route>
+
+          {/* Protected Routes wrapped in HeroLayout */}
+          <Route element={
+            <ProtectedRoute>
+              <HeroLayout />
+            </ProtectedRoute>
+          }>
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/settings" element={<Settings />} />
+            <Route path="/friends" element={<Friends />} />
+            <Route path="/session/:id" element={<SessionLobby />} />
+            <Route path="/session/:id/vote" element={<VoteSession />} />
+            <Route path="/session/:id/matches" element={<Matches />} />
+          </Route>
         </Routes>
       </Router>
     </ThemeProvider>

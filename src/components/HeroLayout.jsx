@@ -1,4 +1,6 @@
 import { useState, useEffect } from 'react';
+import { Outlet, useLocation } from 'react-router-dom';
+import { AnimatePresence, motion } from 'framer-motion';
 import styles from './HeroLayout.module.css';
 
 const BACKGROUNDS = [
@@ -11,7 +13,34 @@ const BACKGROUNDS = [
 
 const ROTATION_INTERVAL = 60000; // 1 minute
 
-const HeroLayout = ({ children }) => {
+// Animation variants
+const pageVariants = {
+  initial: {
+    opacity: 0,
+    y: 10,
+    scale: 0.98
+  },
+  in: {
+    opacity: 1,
+    y: 0,
+    scale: 1
+  },
+  out: {
+    opacity: 0,
+    y: -10,
+    scale: 1.02
+  }
+};
+
+const pageTransition = {
+  type: 'tween',
+  ease: 'easeInOut',
+  duration: 0.4
+};
+
+const HeroLayout = () => {
+  const location = useLocation();
+  
   // Initialize state lazily to prevent flicker
   const [bgImage, setBgImage] = useState(() => {
     const savedBg = sessionStorage.getItem('session_background');
@@ -30,7 +59,7 @@ const HeroLayout = ({ children }) => {
         let newBg;
         do {
           newBg = BACKGROUNDS[Math.floor(Math.random() * BACKGROUNDS.length)];
-        } while (newBg === currentBg); // Ensure it changes
+        } while (newBg === currentBg); 
         
         sessionStorage.setItem('session_background', newBg);
         return newBg;
@@ -49,7 +78,19 @@ const HeroLayout = ({ children }) => {
       <div className={styles.heroOverlay} />
       
       <div className={styles.contentContainer}>
-        {children}
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={location.pathname}
+            initial="initial"
+            animate="in"
+            exit="out"
+            variants={pageVariants}
+            transition={pageTransition}
+            style={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center' }}
+          >
+            <Outlet />
+          </motion.div>
+        </AnimatePresence>
       </div>
     </div>
   );

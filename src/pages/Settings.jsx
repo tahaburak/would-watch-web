@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { profileAPI } from '../services/api';
-import HeroLayout from '../components/HeroLayout';
 import styles from './Settings.module.css';
 
 function Settings() {
@@ -60,7 +59,7 @@ function Settings() {
   }
 
   return (
-    <HeroLayout>
+    <>
       <div className={styles.header}>
         <button className={styles.backButton} onClick={() => navigate('/dashboard')}>
           ← Back
@@ -153,7 +152,7 @@ function Settings() {
           </button>
         </div>
       </div>
-    </HeroLayout>
+    </>
   );
 }
 

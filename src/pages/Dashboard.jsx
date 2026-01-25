@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { roomAPI } from '../services/api';
-import HeroLayout from '../components/HeroLayout';
 import styles from './Dashboard.module.css';
 
 function Dashboard() {
@@ -42,7 +41,7 @@ function Dashboard() {
   };
 
   return (
-    <HeroLayout>
+    <>
       <div className={styles.topBar}>
         <div className={styles.logo}>Would Watch</div>
         <div className={styles.navGroup}>
@@ -85,7 +84,7 @@ function Dashboard() {
           )}
         </div>
       </div>
-    </HeroLayout>
+    </>
   );
 }
 
