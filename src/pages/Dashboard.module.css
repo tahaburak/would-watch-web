@@ -162,6 +162,10 @@
 
 /* Tablet breakpoint */
 @media (max-width: 1024px) {
+  .contentContainer {
+    padding: 30px;
+  }
+
   .mainTitle {
     font-size: 4rem;
   }
@@ -173,6 +177,10 @@
 
 /* Mobile breakpoint */
 @media (max-width: 768px) {
+  .contentContainer {
+    padding: 16px;
+  }
+
   .topBar {
     flex-direction: column;
     gap: 12px;
@@ -242,6 +250,10 @@
 
 /* Small mobile breakpoint */
 @media (max-width: 480px) {
+  .contentContainer {
+    padding: 12px;
+  }
+
   .logo {
     font-size: 1.1rem;
   }

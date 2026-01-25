@@ -41,7 +41,7 @@ function Dashboard() {
   };
 
   return (
-    <>
+    <div className={styles.contentContainer}>
       <div className={styles.topBar}>
         <div className={styles.logo}>Would Watch</div>
         <div className={styles.navGroup}>
@@ -63,14 +63,14 @@ function Dashboard() {
 
         <div className={styles.activeRoomsSection}>
           <h2 className={styles.sectionTitle}>ACTIVE SESSIONS</h2>
-          
+
           {loading ? (
             <div className={styles.emptyState}>Loading signals...</div>
           ) : activeRooms.length > 0 ? (
-            <div className={styles.roomsList}>
+            <div className={styles.roomsGrid}>
               {activeRooms.map(room => (
-                <div 
-                  key={room.id} 
+                <div
+                  key={room.id}
                   className={styles.roomPill}
                   onClick={() => navigate(`/room/${room.id}`)}
                 >
@@ -84,7 +84,7 @@ function Dashboard() {
           )}
         </div>
       </div>
-    </>
+    </div>
   );
 }
 

@@ -59,7 +59,7 @@ function Settings() {
   }
 
   return (
-    <>
+    <div className={styles.contentContainer}>
       <div className={styles.header}>
         <button className={styles.backButton} onClick={() => navigate('/dashboard')}>
           ← Back
@@ -152,7 +152,7 @@ function Settings() {
           </button>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 

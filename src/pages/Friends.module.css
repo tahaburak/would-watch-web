@@ -1,4 +1,13 @@
 /* Hero styles removed - moved to HeroLayout */
+
+.contentContainer {
+  position: relative;
+  z-index: 10;
+  height: 100%;
+  padding: 40px;
+  overflow-y: auto;
+}
+
 /* Header */
 .header {
   max-width: 900px;
@@ -251,6 +260,10 @@
 
 /* Mobile breakpoint */
 @media (max-width: 768px) {
+  .contentContainer {
+    padding: 16px;
+  }
+
   .header {
     flex-direction: column;
     align-items: flex-start;
