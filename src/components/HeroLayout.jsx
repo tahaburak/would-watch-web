@@ -4,24 +4,40 @@ import styles from './HeroLayout.module.css';
 const BACKGROUNDS = [
   '/backgrounds/city_rain.png',
   '/backgrounds/abstract_smoke.png',
-  '/backgrounds/concrete_neon.png'
+  '/backgrounds/concrete_neon.png',
+  '/backgrounds/cyberpunk_alley.png',
+  '/backgrounds/rainy_window.png'
 ];
 
+const ROTATION_INTERVAL = 60000; // 1 minute
+
 const HeroLayout = ({ children }) => {
-  const [bgImage, setBgImage] = useState(BACKGROUNDS[0]);
+  // Initialize state lazily to prevent flicker
+  const [bgImage, setBgImage] = useState(() => {
+    const savedBg = sessionStorage.getItem('session_background');
+    if (savedBg && BACKGROUNDS.includes(savedBg)) {
+      return savedBg;
+    }
+    const randomBg = BACKGROUNDS[Math.floor(Math.random() * BACKGROUNDS.length)];
+    sessionStorage.setItem('session_background', randomBg);
+    return randomBg;
+  });
 
   useEffect(() => {
-    // Check if we already have a background for this session
-    const savedBg = sessionStorage.getItem('session_background');
-    
-    if (savedBg && BACKGROUNDS.includes(savedBg)) {
-      setBgImage(savedBg);
-    } else {
-      // Pick a random one
-      const randomBg = BACKGROUNDS[Math.floor(Math.random() * BACKGROUNDS.length)];
-      setBgImage(randomBg);
-      sessionStorage.setItem('session_background', randomBg);
-    }
+    // Rotation logic
+    const intervalId = setInterval(() => {
+      setBgImage(currentBg => {
+        let newBg;
+        do {
+          newBg = BACKGROUNDS[Math.floor(Math.random() * BACKGROUNDS.length)];
+        } while (newBg === currentBg); // Ensure it changes
+        
+        sessionStorage.setItem('session_background', newBg);
+        return newBg;
+      });
+    }, ROTATION_INTERVAL);
+
+    return () => clearInterval(intervalId);
   }, []);
 
   return (
