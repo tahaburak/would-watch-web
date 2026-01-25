@@ -34,7 +34,7 @@ function Dashboard() {
     const name = `${user.username || 'User'}'s Room`;
     try {
       const room = await roomAPI.createRoom(name, true);
-      navigate(`/room/${room.id}`);
+      navigate(`/session/${room.id}`);
     } catch (err) {
       console.error('Failed to create room:', err);
     }
@@ -72,7 +72,7 @@ function Dashboard() {
                 <div
                   key={room.id}
                   className={styles.roomPill}
-                  onClick={() => navigate(`/room/${room.id}`)}
+                  onClick={() => navigate(`/session/${room.id}`)}
                 >
                   <span className={styles.roomName}>{room.name}</span>
                   <span className={styles.roomMeta}>{room.members?.length || 1} watching</span>
