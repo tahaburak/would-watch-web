@@ -41,7 +41,7 @@ function VoteSession() {
     setError('');
 
     try {
-      const response = await sessionAPI.vote(id, String(currentMovie.id), vote);
+      const response = await sessionAPI.vote(id, String(currentMovie.tmdb_id), vote);
 
       if (response.match) {
         setShowMatch(true);
