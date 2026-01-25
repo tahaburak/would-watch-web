@@ -8,10 +8,37 @@
   gap: 20px;
 }
 
-.posterContainer {
+.flipContainer {
   position: relative;
   width: 100%;
   aspect-ratio: 2/3;
+  cursor: pointer;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+}
+
+.flipContainer.flipped {
+  transform: rotateY(180deg);
+}
+
+.flipFront,
+.flipBack {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.flipBack {
+  transform: rotateY(180deg);
+}
+
+.posterContainer,
+.detailsContainer {
+  position: relative;
+  width: 100%;
+  height: 100%;
   border-radius: 20px;
   overflow: hidden;
   background: var(--glass-base);
@@ -59,6 +86,7 @@
     transparent 100%
   );
   padding: 30px 24px 24px;
+  pointer-events: none;
 }
 
 .info {
@@ -80,6 +108,92 @@
   margin: 0;
   font-weight: 500;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+.flipHint {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(10px);
+  color: rgba(255, 255, 255, 0.8);
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  pointer-events: none;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Back side - Details */
+.detailsContainer {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(135deg, rgba(20, 20, 30, 0.95) 0%, rgba(10, 10, 20, 0.95) 100%);
+  backdrop-filter: blur(20px);
+}
+
+.detailsTitle {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin: 0 0 8px 0;
+  line-height: 1.2;
+  background: linear-gradient(180deg, #fff 0%, #ccc 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 2px 8px rgba(0,0,0,0.5));
+}
+
+.detailsYear {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  margin: 0 0 12px 0;
+  font-weight: 500;
+}
+
+.rating {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 193, 7, 0.15);
+  border: 1px solid rgba(255, 193, 7, 0.3);
+  color: #ffd54f;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 16px;
+  align-self: flex-start;
+}
+
+.overview {
+  flex: 1;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  overflow-y: auto;
+  padding-right: 8px;
+}
+
+.overview::-webkit-scrollbar {
+  width: 6px;
+}
+
+.overview::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 3px;
+}
+
+.overview::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 3px;
+}
+
+.overview::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
 }
 
 .actions {
@@ -156,7 +270,8 @@
     max-width: 420px;
   }
 
-  .title {
+  .title,
+  .detailsTitle {
     font-size: 1.6rem;
   }
 }
@@ -167,12 +282,18 @@
     max-width: 100%;
   }
 
-  .title {
+  .title,
+  .detailsTitle {
     font-size: 1.5rem;
   }
 
-  .year {
+  .year,
+  .detailsYear {
     font-size: 0.95rem;
+  }
+
+  .overview {
+    font-size: 14px;
   }
 
   .button {
@@ -195,7 +316,8 @@
     gap: 16px;
   }
 
-  .posterContainer {
+  .posterContainer,
+  .detailsContainer {
     border-radius: 16px;
   }
 
@@ -203,12 +325,22 @@
     padding: 24px 20px 20px;
   }
 
-  .title {
+  .detailsContainer {
+    padding: 20px;
+  }
+
+  .title,
+  .detailsTitle {
     font-size: 1.3rem;
   }
 
-  .year {
+  .year,
+  .detailsYear {
     font-size: 0.9rem;
+  }
+
+  .overview {
+    font-size: 13px;
   }
 
   .actions {
@@ -227,5 +359,10 @@
 
   .label {
     font-size: 13px;
+  }
+
+  .flipHint {
+    font-size: 11px;
+    padding: 5px 10px;
   }
 }
