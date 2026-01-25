@@ -5,7 +5,7 @@
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 24px;
   perspective: 1000px;
   isolation: isolate;
 }
@@ -17,7 +17,8 @@
   cursor: pointer;
   transition: transform 0.6s;
   transform-style: preserve-3d;
-  z-index: 0;
+  z-index: 1;
+  will-change: transform;
 }
 
 .flipContainer.flipped {
@@ -327,7 +328,8 @@
   gap: 16px;
   width: 100%;
   position: relative;
-  z-index: 10;
+  z-index: 100;
+  transform: translateZ(0);
 }
 
 .button {
