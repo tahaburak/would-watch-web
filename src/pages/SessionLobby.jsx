@@ -43,7 +43,7 @@ function SessionLobby() {
 
   if (loading) {
     return (
-      <div className={styles.container}>
+      <div className={styles.contentContainer}>
         <div className={styles.loading}>Loading session...</div>
       </div>
     );
@@ -51,23 +51,25 @@ function SessionLobby() {
 
   if (error || !session) {
     return (
-      <div className={styles.container}>
-        <div className={styles.error}>{error || 'Session not found'}</div>
-        <button className={styles.backButton} onClick={() => navigate('/dashboard')}>
-          Back to Dashboard
-        </button>
+      <div className={styles.contentContainer}>
+        <div className={styles.errorCard}>
+          <div className={styles.error}>{error || 'Session not found'}</div>
+          <button className={styles.backLink} onClick={() => navigate('/dashboard')}>
+            ← Back to Dashboard
+          </button>
+        </div>
       </div>
     );
   }
 
   return (
-    <div className={styles.container}>
+    <div className={styles.contentContainer}>
       <div className={styles.card}>
         <h1 className={styles.title}>Session Lobby</h1>
 
         <div className={styles.sessionInfo}>
           <div className={styles.infoItem}>
-            <label>Session ID:</label>
+            <label className={styles.label}>Session ID:</label>
             <div className={styles.sessionId}>
               <code>{id}</code>
               <button
@@ -80,8 +82,8 @@ function SessionLobby() {
           </div>
 
           <div className={styles.infoItem}>
-            <label>Status:</label>
-            <span className={styles.status}>{session.status}</span>
+            <label className={styles.label}>Status:</label>
+            <span className={styles.statusBadge}>{session.status}</span>
           </div>
         </div>
 
@@ -101,7 +103,7 @@ function SessionLobby() {
           </button>
 
           <button
-            className={styles.backButton}
+            className={styles.backLink}
             onClick={() => navigate('/dashboard')}
           >
             Back to Dashboard
