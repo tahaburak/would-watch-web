@@ -1,7 +1,11 @@
-.container {
-  min-height: 100vh;
-  background: linear-gradient(135deg, #0f0f1e 0%, #1a1a2e 50%, #16213e 100%);
-  padding: 20px;
+/* Hero styles removed - moved to HeroLayout */
+
+.contentContainer {
+  position: relative;
+  z-index: 10;
+  height: 100%;
+  padding: 40px;
+  overflow-y: auto;
 }
 
 .header {
@@ -11,37 +15,40 @@
   max-width: 800px;
   margin: 0 auto 30px;
   padding: 20px;
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: var(--glass-base);
+  backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
   border-radius: 20px;
 }
 
 .title {
-  font-size: 28px;
-  font-weight: 700;
-  color: #ffffff;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  background: linear-gradient(180deg, #fff 0%, #ccc 100%);
+  background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  background-clip: text;
+  filter: drop-shadow(0 4px 10px rgba(0,0,0,0.5));
   margin: 0;
 }
 
 .backButton {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 10px;
+  background: transparent;
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-pill);
   padding: 10px 20px;
-  color: rgba(255, 255, 255, 0.8);
+  color: var(--text-secondary);
   font-size: 14px;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
+  backdrop-filter: blur(4px);
 }
 
 .backButton:hover {
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text-primary);
   border-color: rgba(255, 255, 255, 0.2);
   transform: translateY(-2px);
 }
@@ -63,41 +70,43 @@
 
 .searchInput {
   flex: 1;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 12px;
+  background: var(--glass-base);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-md);
   padding: 16px 20px;
-  color: #ffffff;
+  color: var(--text-primary);
   font-size: 16px;
   transition: all 0.3s ease;
+  backdrop-filter: blur(var(--glass-blur));
 }
 
 .searchInput:focus {
   outline: none;
-  border-color: #667eea;
-  background: rgba(255, 255, 255, 0.08);
-  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+  border-color: var(--text-secondary);
+  background: rgba(0, 0, 0, 0.4);
 }
 
 .searchInput::placeholder {
-  color: rgba(255, 255, 255, 0.3);
+  color: var(--text-secondary);
+  opacity: 0.6;
 }
 
 .searchButton {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: var(--accent-primary);
   border: none;
-  border-radius: 12px;
+  border-radius: var(--radius-md);
   padding: 16px 32px;
-  color: #ffffff;
+  color: white;
   font-size: 16px;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
+  box-shadow: var(--accent-glow);
 }
 
 .searchButton:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+  filter: brightness(1.1);
 }
 
 .searchButton:active {
@@ -112,7 +121,7 @@
 
 .movieInfo {
   text-align: center;
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--text-secondary);
   font-size: 14px;
   margin-bottom: 20px;
   font-weight: 500;
@@ -134,7 +143,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #ffffff;
+  color: var(--text-primary);
   font-size: 18px;
   font-weight: 600;
   border-radius: 20px;
@@ -149,13 +158,13 @@
 }
 
 .emptyState h3 {
-  color: #ffffff;
+  color: var(--text-primary);
   font-size: 22px;
   margin: 0 0 12px 0;
 }
 
 .emptyState p {
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--text-secondary);
   font-size: 16px;
   margin: 0;
 }
@@ -176,13 +185,13 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: var(--accent-primary);
   padding: 30px 50px;
   border-radius: 20px;
   font-size: 32px;
   font-weight: 700;
-  color: #ffffff;
-  box-shadow: 0 12px 48px rgba(102, 126, 234, 0.6);
+  color: white;
+  box-shadow: 0 12px 48px rgba(255, 0, 0, 0.6);
   z-index: 1000;
   animation: matchPop 0.5s ease-out;
 }
@@ -198,5 +207,78 @@
   100% {
     transform: translate(-50%, -50%) scale(1);
     opacity: 1;
+  }
+}
+
+/* Tablet breakpoint */
+@media (max-width: 1024px) {
+  .contentContainer {
+    padding: 30px;
+  }
+
+  .title {
+    font-size: 1.75rem;
+  }
+}
+
+/* Mobile breakpoint */
+@media (max-width: 768px) {
+  .contentContainer {
+    padding: 16px;
+  }
+
+  .header {
+    flex-direction: column;
+    gap: 16px;
+    align-items: flex-start;
+    padding: 16px;
+  }
+
+  .title {
+    font-size: 1.5rem;
+  }
+
+  .searchForm {
+    flex-direction: column;
+  }
+
+  .searchButton {
+    width: 100%;
+  }
+
+  .searchInput {
+    font-size: 16px; /* Prevents zoom on iOS */
+  }
+}
+
+/* Small mobile breakpoint */
+@media (max-width: 480px) {
+  .contentContainer {
+    padding: 12px;
+  }
+
+  .header {
+    padding: 12px;
+  }
+
+  .title {
+    font-size: 1.25rem;
+  }
+
+  .emptyState {
+    padding: 40px 16px;
+  }
+
+  .emptyState h3 {
+    font-size: 18px;
+  }
+
+  .emptyState p {
+    font-size: 14px;
+  }
+
+  .matchNotification {
+    padding: 20px 30px;
+    font-size: 24px;
   }
 }

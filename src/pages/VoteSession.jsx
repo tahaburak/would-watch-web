@@ -60,7 +60,7 @@ function VoteSession() {
   const hasMoreMovies = currentIndex < movies.length;
 
   return (
-    <div className={styles.container}>
+    <div className={styles.contentContainer}>
       <div className={styles.header}>
         <h1 className={styles.title}>Vote on Movies</h1>
         <button

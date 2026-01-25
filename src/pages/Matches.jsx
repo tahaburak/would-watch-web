@@ -40,10 +40,16 @@ function Matches() {
     }
   };
 
-  if (loading) return <div className={styles.loading}>Loading matches...</div>;
+  if (loading) {
+    return (
+      <div className={styles.contentContainer}>
+        <div className={styles.loading}>Loading matches...</div>
+      </div>
+    );
+  }
 
   return (
-    <div className={styles.container}>
+    <div className={styles.contentContainer}>
       <header className={styles.header}>
         <button onClick={() => navigate('/dashboard')} className={styles.backButton}>
           ← Dashboard
