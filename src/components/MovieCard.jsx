@@ -42,7 +42,17 @@ function MovieCard({ movie, onVote }) {
             </div>
 
             <div className={styles.flipHint}>
-              Tap for details
+              <div className={styles.previewCard}>
+                <div className={styles.previewTitle}>{movie.title}</div>
+                <div className={styles.previewYear}>
+                  {movie.release_date && new Date(movie.release_date).getFullYear()}
+                </div>
+                {movie.vote_average > 0 && (
+                  <div className={styles.previewRating}>
+                    ⭐ {movie.vote_average.toFixed(1)}
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         </div>
@@ -64,8 +74,15 @@ function MovieCard({ movie, onVote }) {
             <div className={styles.overview}>
               {movie.overview || 'No description available.'}
             </div>
+
             <div className={styles.flipHint}>
-              Tap to flip back
+              {posterUrl ? (
+                <img src={posterUrl} alt={movie.title} className={styles.previewPoster} />
+              ) : (
+                <div className={styles.previewNoPoster}>
+                  <span>🎬</span>
+                </div>
+              )}
             </div>
           </div>
         </div>
