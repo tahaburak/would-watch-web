@@ -7,6 +7,7 @@
   flex-direction: column;
   gap: 20px;
   perspective: 1000px;
+  isolation: isolate;
 }
 
 .flipContainer {
@@ -16,7 +17,7 @@
   cursor: pointer;
   transition: transform 0.6s;
   transform-style: preserve-3d;
-  z-index: 1;
+  z-index: 0;
 }
 
 .flipContainer.flipped {
@@ -36,8 +37,7 @@
   transform: rotateY(180deg);
 }
 
-.posterContainer,
-.detailsContainer {
+.posterContainer {
   position: relative;
   width: 100%;
   height: 100%;
@@ -46,6 +46,24 @@
   background: var(--glass-base);
   border: 1px solid var(--glass-border);
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);
+}
+
+.detailsContainer {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 20px;
+  overflow: hidden;
+  background: linear-gradient(135deg, rgba(15, 15, 25, 0.98) 0%, rgba(25, 15, 35, 0.98) 100%);
+  backdrop-filter: blur(30px);
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);
+  padding: 32px 24px 28px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0;
 }
 
 .poster {
@@ -196,27 +214,16 @@
 }
 
 /* Back side - Details */
-.detailsContainer {
-  padding: 32px 24px 28px;
-  display: flex;
-  flex-direction: column;
-  background: linear-gradient(135deg, rgba(15, 15, 25, 0.98) 0%, rgba(25, 15, 35, 0.98) 100%);
-  backdrop-filter: blur(30px);
-  position: relative;
-  align-items: center;
-  text-align: center;
-  gap: 0;
-}
-
 .detailsContainer::before {
   content: '';
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
-  height: 4px;
+  height: 3px;
   background: linear-gradient(90deg, var(--accent-primary), #ff6b6b, #ff1744);
-  opacity: 0.8;
+  opacity: 0.7;
+  border-radius: 20px 20px 0 0;
 }
 
 .detailsTitle {
