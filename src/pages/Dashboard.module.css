@@ -1,31 +1,4 @@
-
-.heroWrapper {
-  position: fixed;
-  inset: 0;
-  overflow: hidden;
-  background-color: var(--bg-dark);
-}
-
-.heroBackground {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  background-image: url('https://image.tmdb.org/t/p/original/8Y43POKjjKDGI9MH89NW0NAzzp8.jpg'); /* The Batman (2022) as placeholder */
-  background-size: cover;
-  background-position: center;
-}
-
-.heroOverlay {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  background: linear-gradient(
-    to bottom,
-    transparent 0%,
-    rgba(0, 0, 0, 0.4) 50%,
-    var(--bg-dark) 95%
-  );
-}
+/* Hero styles removed - moved to HeroLayout */
 
 .contentContainer {
   position: relative;
@@ -189,10 +162,6 @@
 
 /* Tablet breakpoint */
 @media (max-width: 1024px) {
-  .contentContainer {
-    padding: 30px;
-  }
-
   .mainTitle {
     font-size: 4rem;
   }
@@ -204,10 +173,6 @@
 
 /* Mobile breakpoint */
 @media (max-width: 768px) {
-  .contentContainer {
-    padding: 16px;
-  }
-
   .topBar {
     flex-direction: column;
     gap: 12px;
@@ -277,10 +242,6 @@
 
 /* Small mobile breakpoint */
 @media (max-width: 480px) {
-  .contentContainer {
-    padding: 12px;
-  }
-
   .logo {
     font-size: 1.1rem;
   }

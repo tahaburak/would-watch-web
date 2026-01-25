@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { socialAPI } from '../services/api';
+import HeroLayout from '../components/HeroLayout';
 import styles from './Friends.module.css';
 
 function Friends() {
@@ -136,7 +137,7 @@ function Friends() {
   };
 
   return (
-    <div className={styles.container}>
+    <HeroLayout>
       <div className={styles.header}>
         <button className={styles.backButton} onClick={() => navigate('/dashboard')}>
           ← Back
@@ -193,7 +194,7 @@ function Friends() {
           </>
         )}
       </div>
-    </div>
+    </HeroLayout>
   );
 }
 

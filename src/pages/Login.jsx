@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import HeroLayout from '../components/HeroLayout';
 import styles from './Login.module.css';
 
 function Login() {
@@ -44,11 +45,8 @@ function Login() {
   };
 
   return (
-    <div className={styles.heroWrapper}>
-      <div className={styles.heroBackground} />
-      <div className={styles.heroOverlay} />
-      
-      <div className={styles.contentContainer}>
+    <HeroLayout>
+      <div className={styles.container}>
         <div className={styles.card}>
           <h1 className={styles.title}>Would Watch</h1>
           <p className={styles.subtitle}>
@@ -111,7 +109,7 @@ function Login() {
           </p>
         </div>
       </div>
-    </div>
+    </HeroLayout>
   );
 }
 

@@ -1,40 +1,9 @@
-.heroWrapper {
-  position: fixed;
-  inset: 0;
-  overflow: hidden;
-  background-color: var(--bg-dark);
-}
-
-.heroBackground {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  background-image: url('https://image.tmdb.org/t/p/original/8Y43POKjjKDGI9MH89NW0NAzzp8.jpg'); /* The Batman (2022) */
-  background-size: cover;
-  background-position: center;
-}
-
-.heroOverlay {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  background: linear-gradient(
-    to bottom,
-    rgba(0, 0, 0, 0.4) 0%,
-    rgba(0, 0, 0, 0.7) 50%,
-    var(--bg-dark) 100%
-  );
-  backdrop-filter: blur(8px);
-}
-
-.contentContainer {
-  position: relative;
-  z-index: 10;
-  height: 100%;
+.container {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 20px;
+  height: 100%;
+  width: 100%;
 }
 
 .card {
