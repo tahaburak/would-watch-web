@@ -8,7 +8,8 @@ const BACKGROUNDS = [
   '/backgrounds/abstract_smoke.png',
   '/backgrounds/concrete_neon.png',
   '/backgrounds/cyberpunk_alley.png',
-  '/backgrounds/rainy_window.png'
+  '/backgrounds/rainy_window.png',
+  '/backgrounds/sunset_window.png'
 ];
 
 const ROTATION_INTERVAL = 60000; // 1 minute
