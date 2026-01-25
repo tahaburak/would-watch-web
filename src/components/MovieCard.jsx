@@ -12,6 +12,57 @@ function MovieCard({ movie, onVote }) {
     setIsFlipped(!isFlipped);
   };
 
+  const renderStars = (rating, size = 'default') => {
+    const maxStars = 5;
+    const normalizedRating = (rating / 10) * maxStars;
+    const fullStars = Math.floor(normalizedRating);
+    const partialStar = normalizedRating % 1;
+    const emptyStars = maxStars - Math.ceil(normalizedRating);
+
+    const stars = [];
+
+    // Full stars
+    for (let i = 0; i < fullStars; i++) {
+      stars.push(
+        <span key={`full-${i}`} className={size === 'small' ? styles.previewStar : styles.star}>
+          ★
+        </span>
+      );
+    }
+
+    // Partial star
+    if (partialStar > 0) {
+      if (size === 'small') {
+        stars.push(
+          <span key="partial" className={styles.previewStar}>
+            ★
+          </span>
+        );
+      } else {
+        stars.push(
+          <span
+            key="partial"
+            className={`${styles.star} ${styles.partial}`}
+            style={{ '--fill-width': `${partialStar * 100}%` }}
+          >
+            ★
+          </span>
+        );
+      }
+    }
+
+    // Empty stars
+    for (let i = 0; i < emptyStars; i++) {
+      stars.push(
+        <span key={`empty-${i}`} className={`${size === 'small' ? styles.previewStar : styles.star} ${styles.empty}`}>
+          ★
+        </span>
+      );
+    }
+
+    return stars;
+  };
+
   return (
     <div className={styles.card}>
       <div
@@ -43,15 +94,14 @@ function MovieCard({ movie, onVote }) {
 
             <div className={styles.flipHint}>
               <div className={styles.previewCard}>
-                <div className={styles.previewTitle}>{movie.title}</div>
-                <div className={styles.previewYear}>
-                  {movie.release_date && new Date(movie.release_date).getFullYear()}
-                </div>
                 {movie.vote_average > 0 && (
-                  <div className={styles.previewRating}>
-                    ⭐ {movie.vote_average.toFixed(1)}
+                  <div className={styles.previewStars}>
+                    {renderStars(movie.vote_average, 'small')}
                   </div>
                 )}
+                <div className={styles.previewOverview}>
+                  {movie.overview || 'No description available.'}
+                </div>
               </div>
             </div>
           </div>
@@ -68,7 +118,12 @@ function MovieCard({ movie, onVote }) {
             )}
             {movie.vote_average > 0 && (
               <div className={styles.rating}>
-                ⭐ {movie.vote_average.toFixed(1)} / 10
+                <div className={styles.stars}>
+                  {renderStars(movie.vote_average)}
+                </div>
+                <div className={styles.ratingText}>
+                  {movie.vote_average.toFixed(1)} / 10
+                </div>
               </div>
             )}
             <div className={styles.overview}>
