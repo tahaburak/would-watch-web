@@ -214,17 +214,6 @@
 }
 
 /* Back side - Details */
-.detailsContainer::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, var(--accent-primary), #ff6b6b, #ff1744);
-  opacity: 0.7;
-  border-radius: 20px 20px 0 0;
-}
 
 .detailsTitle {
   font-size: 1.6rem;
